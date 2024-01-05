@@ -1,50 +1,55 @@
-// import { makeAutoObservable } from "mobx";
+import { create } from "zustand";
 
-class store {
-  constructor() {
-    // makeAutoObservable(this);
-  }
+type CryptocurrencyStoreType = {
+  numberOfBitcoinsTheViewerHas: number;
+  bitcoinPrice: number;
 
-  numberOfBitcoinsTheViewerHas = 0;
-  bitcoinPrice = 0;
+  setNumberOfBitcoinsTheViewerHas: (value: number) => void;
+  getBitcoinPrice: () => Promise<number>;
+  getNumberOfBitcoinsTheViewerHas: (id: number) => Promise<number>;
+};
 
-  set setBitcoinPrice(value: number) {
-    this.bitcoinPrice = value;
-  }
-  set setNumberOfBitcoinsTheViewerHas(value: number) {
-    this.numberOfBitcoinsTheViewerHas = value;
-  }
+export const useCryptocurrencyStore = create<CryptocurrencyStoreType>(
+  (set, get) => ({
+    bitcoinPrice: 0,
+    numberOfBitcoinsTheViewerHas: 0,
 
-  getBitcoinPrice = () => {
-    return new Promise<number>((resolve, reject) => {
-      const tmp =
-        Math.floor(Math.random() * 101) +
-        Math.floor(Math.random() * 101) +
-        Math.floor(Math.random() * 101) +
-        Math.floor(Math.random() * 101);
-      resolve(tmp);
-      this.setBitcoinPrice = tmp;
-      // qBitcoinPoints({id: id})
-      //   .then((data) => {
-      //     this.setBitcoinPoints = data.bitcoinPoints;
-      //     resolve(data)
-      //   })
-      //   .catch((err) => {
-      //     reject(err)
-      //   });
-    });
-  };
-  getNumberOfBitcoinsTheViewerHas = (id: number) => {
-    return new Promise<number>((resolve, reject) => {
-      const tmp = Math.floor(Math.random() * 11) + id;
-      resolve(tmp);
-      this.setNumberOfBitcoinsTheViewerHas = tmp;
-    });
-  };
+    setNumberOfBitcoinsTheViewerHas: (value: number) => {
+      set({ numberOfBitcoinsTheViewerHas: value });
+    },
 
-  get getMoneyTheViewerHas() {
-    return (this.bitcoinPrice * this.numberOfBitcoinsTheViewerHas).toFixed(2);
-  }
-}
+    getBitcoinPrice: () => {
+      return new Promise<number>((resolve, reject) => {
+        const tmp =
+          Math.floor(Math.random() * 101) +
+          Math.floor(Math.random() * 101) +
+          Math.floor(Math.random() * 101) +
+          Math.floor(Math.random() * 101);
 
-export const CryptocurrencyStore = new store();
+        set(() => ({ bitcoinPrice: tmp }));
+        resolve(tmp);
+
+        // qBitcoinPoints({id: id})
+        //   .then((data) => {
+        //     set(() => ({ bitcoinPrice: data.bitcoinPoints }));
+        //     resolve(data)
+        //   })
+        //   .catch((err) => {
+        //     reject(err)
+        //   });
+      });
+    },
+
+    getNumberOfBitcoinsTheViewerHas: (id: number) => {
+      return new Promise<number>((resolve, reject) => {
+        const tmp = Math.floor(Math.random() * 11) + id;
+        set(() => ({ numberOfBitcoinsTheViewerHas: tmp }));
+        resolve(tmp);
+      });
+    },
+
+    // deleteEverything: () => {
+    //   set({}, true);
+    // },
+  }),
+);
