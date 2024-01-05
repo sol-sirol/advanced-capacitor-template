@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "./styles/reset";
+@import "./styles/fonts";
+@import "./styles/lib";
+@import "./styles/redefinitionF7";
+@import "./styles/global";
+
+@import "./styles/shared";
+@import "./styles/entities";
+@import "./styles/features";
+@import "./styles/widgets";
+@import "./styles/pages";
