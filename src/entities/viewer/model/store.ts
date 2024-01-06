@@ -47,9 +47,5 @@ export const useCryptocurrencyStore = create<CryptocurrencyStoreType>(
         resolve(tmp);
       });
     },
-
-    // deleteEverything: () => {
-    //   set({}, true);
-    // },
   }),
 );

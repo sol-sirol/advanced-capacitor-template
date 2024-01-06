@@ -165,8 +165,6 @@ export const handleBackButton = () => {
       }
 
       confirm("Закрыть приложение?", "", () => {
-        //cordova
-        //window.navigator.app.exitApp();
         App.exitApp();
       });
       return;

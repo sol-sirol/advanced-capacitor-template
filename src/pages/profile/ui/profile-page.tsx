@@ -6,7 +6,7 @@ import { ViewerAccount, ViewerAvatar } from "@entities/viewer";
 
 export const ProfilePage = () => {
   return (
-    <Page noNavbar>
+    <Page>
       <Navbar title="My Profile" />
       <div className="flex items-center justify-between p-4">
         <div>Здравствуй!</div>

@@ -10,7 +10,7 @@ export const HomePage = () => {
   }, []);
 
   return (
-    <Page pageContent={false} noNavbar>
+    <Page pageContent={false}>
       <Navbar title="home" />
       <PageContent>
         <Image
